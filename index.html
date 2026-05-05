@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EF Infrastructure Shopping List</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+    background: #1a1a2e;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  #login-gate {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 80vh; flex-direction: column;
+  }
+  #login-gate h1 { color: #FFC629; margin-bottom: 20px; font-size: 1.6rem; }
+  #login-gate input {
+    background: #222244; border: 2px solid #333; color: #fff;
+    padding: 12px 20px; border-radius: 8px; font-size: 1rem;
+    width: 260px; text-align: center; margin-bottom: 12px;
+  }
+  #login-gate input:focus { outline: none; border-color: #FFC629; }
+  #login-gate button {
+    background: #FFC629; color: #1a1a2e; border: none;
+    padding: 10px 30px; border-radius: 8px; font-weight: 700;
+    font-size: 1rem; cursor: pointer;
+  }
+  #login-gate button:hover { background: #e6b325; }
+  #login-gate .error { color: #F75272; font-size: 0.85rem; margin-top: 8px; }
+  #content { display: none; }
+
+  .header { text-align: center; padding: 30px 0 20px; }
+  .header h1 { font-size: 2rem; color: #FFC629; margin-bottom: 6px; }
+  .header p { color: #888; font-size: 0.9rem; }
+  .section { max-width: 1000px; margin: 0 auto 40px; }
+  .section h2 {
+    font-size: 1.3rem; color: #FFC629; margin-bottom: 16px;
+    padding-bottom: 8px; border-bottom: 1px solid #333;
+  }
+  .section h2 .badge {
+    font-size: 0.7rem; padding: 3px 10px; border-radius: 12px;
+    vertical-align: middle; margin-left: 10px; font-weight: 600;
+  }
+  .badge-buy { background: #426EFB; color: #fff; }
+  .badge-verify { background: #FF8C00; color: #fff; }
+  .badge-done { background: #2ecc71; color: #fff; }
+  .badge-monitor { background: #888; color: #fff; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+  th {
+    text-align: left; padding: 10px 12px; background: #222244;
+    color: #FFC629; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  td { padding: 10px 12px; border-bottom: 1px solid #2a2a4a; font-size: 0.9rem; }
+  tr:hover td { background: #1e1e3a; }
+
+  .status { font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
+  .status-buy { color: #426EFB; }
+  .status-verify { color: #FF8C00; }
+  .status-done { color: #2ecc71; }
+  .status-monitor { color: #888; }
+  .status-needed { color: #F75272; }
+
+  .gate-box {
+    background: #2a2a4a; border-left: 3px solid #FF8C00; padding: 14px 18px;
+    border-radius: 6px; margin-bottom: 20px;
+  }
+  .gate-box h3 { color: #FF8C00; font-size: 0.95rem; margin-bottom: 10px; }
+  .gate-box ul { list-style: none; padding: 0; }
+  .gate-box li {
+    padding: 6px 0; font-size: 0.88rem; border-bottom: 1px solid #333;
+  }
+  .gate-box li:last-child { border-bottom: none; }
+
+  .summary-box {
+    background: #222244; border: 1px solid #FFC629; border-radius: 8px;
+    padding: 20px; max-width: 1000px; margin: 0 auto 40px; text-align: center;
+  }
+  .summary-box h3 { color: #FFC629; margin-bottom: 12px; font-size: 1.1rem; }
+  .cost-range { font-size: 1.8rem; font-weight: 700; color: #fff; }
+  .cost-note { font-size: 0.85rem; color: #888; margin-top: 8px; }
+
+  .note { font-size: 0.8rem; color: #999; font-style: italic; }
+
+  @media (max-width: 700px) {
+    table { font-size: 0.8rem; }
+    th, td { padding: 8px 6px; }
+    .cost-range { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="login-gate">
+  <h1>EF Infrastructure</h1>
+  <input type="password" id="pw" placeholder="Password" autofocus>
+  <button onclick="unlock()">Enter</button>
+  <div class="error" id="err"></div>
+</div>
+
+<div id="content">
+
+  <div class="header">
+    <h1>Infrastructure Shopping List</h1>
+    <p>Socrates + NAS + Plato + Metabox + Aristotle + Security &mdash; updated 5 May 2026</p>
+    <div style="background:#4a1020; border:2px solid #F75272; border-radius:8px; padding:16px; max-width:1000px; margin:16px auto; text-align:left;">
+      <h3 style="color:#F75272; margin-bottom:10px;">NAS HEALTH ALERT &mdash; Immediate Attention Required</h3>
+      <p style="font-size:0.9rem; margin-bottom:8px;"><strong style="color:#F75272;">CPU: 92.3%</strong> with zero users connected &bull; <strong style="color:#F75272;">Free RAM: 261 MB</strong> out of 12 GB &bull; <strong style="color:#F75272;">Storage: 73%</strong> (past 70% trigger)</p>
+      <p style="font-size:0.9rem; margin-bottom:8px;"><strong>1,844 warnings + 20 errors</strong> in the past month with <strong>no notification rules configured</strong>.</p>
+      <p style="font-size:0.85rem; color:#ccc;"><strong>Free fixes now:</strong> Disable Antivirus real-time scan, Multimedia Services real-time scan, DLNA, Download Station. Stop VM if not needed. Set up notification rules.</p>
+    </div>
+  </div>
+
+  <!-- VERIFICATION GATES -->
+  <div class="section">
+    <div class="gate-box" style="border-left-color: #2ecc71;">
+      <h3 style="color: #2ecc71;">Verification Gates &mdash; Progress (updated 5 May 2026)</h3>
+      <ul>
+        <li style="color: #2ecc71;"><strong>&#10003; QNAP 10GbE:</strong> Confirmed NO built-in 10GbE &mdash; QXG-10G2TB selected (low-profile, fits 68.9mm slot)</li>
+        <li style="color: #2ecc71;"><strong>&#10003; QNAP RAM:</strong> Confirmed 12GB (8+4 mismatched non-ECC) &mdash; OWC 32GB ECC kit identified</li>
+        <li style="color: #2ecc71;"><strong>&#10003; Socrates PCIe slot:</strong> Free PCIe 4.0 x4 slot confirmed &mdash; TX401 (full-height) will fit desktop tower</li>
+        <li style="color: #2ecc71;"><strong>&#10003; TX401 won't fit NAS:</strong> DMD caught &mdash; 98.2mm card vs 68.9mm chassis clearance. QXG-10G2TB (67mm) is correct part</li>
+        <li style="color: #2ecc71;"><strong>&#10003; Metabox Thunderbolt:</strong> 2&times; TB4 ports confirmed &mdash; OWC adapter compatible. Also has 2.5GbE built-in (free upgrade with new switch)</li>
+        <li style="color: #2ecc71;"><strong>&#10003; NAS PCIe Slot 2:</strong> Must use Slot 2 (210mm length). Slot 1 too short (97mm) for dual-port card</li>
+        <li><strong>QNAP M.2 slots</strong> &mdash; Storage &amp; Snapshots &rarr; Cache Acceleration (determines SSD cache option)</li>
+        <li><strong>Distance measurement</strong> &mdash; Socrates &harr; switch &harr; NAS. Assumed ~10m (separate rooms) &mdash; Cat6A ordered</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- NETWORKING -->
+  <div class="section">
+    <h2>Networking (10GbE Core + Thunderbolt) <span class="badge badge-buy">TO BUY</span></h2>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Spec</th>
+        <th>Est. Cost (AUD)</th>
+        <th>Status</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td><strong>Socrates 10GbE NIC</strong></td>
+        <td>TP-Link TX401 (single RJ45, Aquantia AQC107, PCIe 3.0 x4)</td>
+        <td>$109</td>
+        <td><span class="status status-buy">To Buy</span></td>
+        <td>Full-height card fits Socrates desktop tower. Includes 1.5m Cat6A cable. <a href="https://www.scorptec.com.au/product/networking/adapters/84466-tx401" style="color:#426EFB;" target="_blank">Scorptec</a></td>
+      </tr>
+      <tr>
+        <td><strong>NAS 10GbE NIC</strong></td>
+        <td>QNAP QXG-10G2TB (dual RJ45, Marvell AQC113C, PCIe Gen3 x4, low-profile)</td>
+        <td>$339</td>
+        <td><span class="status status-buy">At Supplier</span></td>
+        <td><strong>DMD VERIFIED:</strong> TX401 won't fit NAS (98.2mm vs 68.9mm clearance). Install in <strong>Slot 2 only</strong>. Native QTS driver. <a href="https://www.scorptec.com.au/product/nas/accessories/100312-qxg-10g2tb" style="color:#426EFB;" target="_blank">Scorptec ($339)</a></td>
+      </tr>
+      <tr>
+        <td><strong>Network Switch</strong></td>
+        <td>TP-Link TL-SX1008 (8-port 10GbE RJ45, unmanaged)</td>
+        <td>~$450</td>
+        <td><span class="status status-buy">To Buy</span></td>
+        <td>Auto-negotiates 100M/1G/2.5G/5G/10G per port. NAS+Socrates at 10G, Metabox at 2.5G free. <a href="https://www.scorptec.com.au/product/networking/switches/101785-tl-sx1008" style="color:#426EFB;" target="_blank">Scorptec</a></td>
+      </tr>
+      <tr>
+        <td><strong>Cat6A Cables</strong></td>
+        <td>2&times; 10m + 1&times; 1m patch</td>
+        <td>$78</td>
+        <td><span class="status status-buy">To Buy</span></td>
+        <td>10m runs: switch &rarr; Socrates + switch &rarr; Plato. 1m: NAS &rarr; switch. <a href="https://www.scorptec.com.au/product/cables-&-adapters/network/65620-c6a-10-black-sh" style="color:#426EFB;" target="_blank">Scorptec</a></td>
+      </tr>
+    </table>
+
+    <h3 style="color: #FFC629; margin: 20px 0 12px; font-size: 1rem;">Thunderbolt 10GbE Adapters (Optional &mdash; Portable Machines)</h3>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Spec</th>
+        <th>Est. Cost (AUD)</th>
+        <th>Status</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td><strong>Plato (MacBook Pro M4 Max)</strong></td>
+        <td>OWC Thunderbolt 4 10G Ethernet Adapter (RJ45, bus-powered)</td>
+        <td>$449.99</td>
+        <td><span class="status status-buy">In Stock</span></td>
+        <td>Currently on USB 1G. TB4 = full 10G to NAS. Ships 24hrs. <a href="https://www.macfixit.com.au/collections/ethernet/products/owc-thunderbolt-4-10g-ethernet-adapter" style="color:#426EFB;" target="_blank">Macfixit AU</a></td>
+      </tr>
+      <tr>
+        <td><strong>Metabox (Prime-XR X370SNW)</strong></td>
+        <td>OWC Thunderbolt 4 10G Ethernet Adapter (RJ45, bus-powered)</td>
+        <td>$449.99</td>
+        <td><span class="status status-verify">Decide</span></td>
+        <td>Has Killer E3100X <strong>2.5 Gbps</strong> built-in &mdash; gets 2.5G free with new switch. TB4 only if full 10G needed.</td>
+      </tr>
+    </table>
+    <div class="gate-box" style="margin-top: 12px; border-left-color: #426EFB;">
+      <h3 style="color: #426EFB;">Decision: Thunderbolt Adapters</h3>
+      <ul>
+        <li style="border-bottom-color:#333;"><strong>Metabox gets 2.5G for free</strong> with new switch (no purchase needed). Full 10G = $450 extra.</li>
+        <li style="border-bottom-color:#333;"><strong>Plato currently stuck at 1G</strong> (USB adapter). TB4 adapter = 10&times; improvement. Strongest case for purchase.</li>
+        <li><strong>Critical 10G path is NAS &harr; Socrates</strong> (AI training data). Laptop 10G is nice-to-have.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECURITY -->
+  <div class="section">
+    <h2>Security &amp; Remote Access <span class="badge badge-buy">TO BUY</span></h2>
+    <table>
+      <tr><th>Item</th><th>Spec</th><th>Est. Cost (AUD)</th><th>Status</th><th>Notes</th></tr>
+      <tr>
+        <td><strong>YubiKey 5C NFC &times;2</strong></td>
+        <td>USB-C + NFC. Primary 2FA for all machines + iPad</td>
+        <td>$176 (US$58 ea)</td>
+        <td><span class="status status-buy">To Buy</span></td>
+        <td>Ships from Singapore, 45-day returns. <a href="https://www.yubico.com/au/product/yubikey-5-series/yubikey-5c-nfc/" style="color:#426EFB;" target="_blank">yubico.com/au</a></td>
+      </tr>
+      <tr>
+        <td><strong>Blink Shell</strong></td>
+        <td>iPad SSH client</td>
+        <td>&mdash;</td>
+        <td><span class="status status-done">Purchased</span></td>
+        <td>Subscription active</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ARISTOTLE -->
+  <div class="section">
+    <h2>Aristotle (Mac M3 Ultra 512GB) <span class="badge badge-done">PURCHASED</span></h2>
+    <table>
+      <tr><th>Item</th><th>Spec</th><th>Est. Cost (AUD)</th><th>Status</th><th>Notes</th></tr>
+      <tr>
+        <td><strong>Mac Studio M3 Ultra</strong></td>
+        <td>32C CPU / 80C GPU / 512GB unified / 2TB SSD</td>
+        <td>&mdash;</td>
+        <td><span class="status status-done">Purchased</span></td>
+        <td>Not unboxed. Hold-or-open decision active (WWDC June 2026 / M5)</td>
+      </tr>
+      <tr>
+        <td><strong>AppleCare+</strong></td>
+        <td>Annual plan</td>
+        <td>&mdash;</td>
+        <td><span class="status status-verify">Payment Setup Incomplete</span></td>
+        <td>Orange warning on Apple account. Click "Finish Setup" to link payment method.</td>
+      </tr>
+      <tr>
+        <td><strong>Business Insurance</strong></td>
+        <td>Agreed-value business contents cover</td>
+        <td>TBD</td>
+        <td><span class="status status-needed">Needed</span></td>
+        <td>Get quote from existing EF insurer</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- NAS EXPANSION -->
+  <div class="section">
+    <h2>NAS Expansion <span class="badge badge-monitor">MONITOR</span></h2>
+    <table>
+      <tr><th>Item</th><th>Spec</th><th>Est. Cost (AUD)</th><th>Status</th><th>Notes</th></tr>
+      <tr>
+        <td><strong>Second NAS</strong></td>
+        <td>Confidential data isolation (Mikey/contractor boundary)</td>
+        <td>TBD</td>
+        <td><span class="status status-monitor">Monitor</span></td>
+        <td>Complete software/data audit first, then reassess</td>
+      </tr>
+      <tr>
+        <td><strong>Offsite Backup</strong></td>
+        <td>AWS S3 Glacier Deep Archive (Sydney) ~$31.40/mo for 20TB</td>
+        <td>~$377/yr</td>
+        <td><span class="status status-needed">Needed</span></td>
+        <td>NAS at 73%. No offsite copy = Do not proceed risk band</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- NAS PERFORMANCE UPGRADES -->
+  <div class="section">
+    <h2>NAS Performance Upgrades <span class="badge badge-buy">CONFIRMED</span></h2>
+    <table>
+      <tr><th>#</th><th>Item</th><th>Spec</th><th>Est. Cost (AUD)</th><th>Status</th><th>Notes</th></tr>
+      <tr style="background: #1e1e3a;">
+        <td><strong style="color:#F75272; font-size:1.1rem;">#1</strong></td>
+        <td><strong>NAS RAM Upgrade</strong></td>
+        <td>2&times;32GB DDR4 ECC SO-DIMM</td>
+        <td>$350&ndash;$500</td>
+        <td><span class="status status-buy">To Buy</span></td>
+        <td><strong style="color:#F75272;">EMERGENCY: Only 261 MB free.</strong> Currently 12GB mismatched. Replace with matched 64GB (max supported). #1 cause of NAS being slow.</td>
+      </tr>
+      <tr style="background: #1e1e3a;">
+        <td><strong style="color:#FF8C00;">#2</strong></td>
+        <td><strong>NAS M.2 SSD Cache</strong></td>
+        <td>1&ndash;2&times; NVMe M.2 2280, 1TB+</td>
+        <td>$150&ndash;$400</td>
+        <td><span class="status status-buy">To Buy</span></td>
+        <td>2&times; M.2 slots confirmed available. Samsung 990 EVO or WD Black SN770 (~$150 ea).</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#FF8C00;">#3</strong></td>
+        <td><strong>NAS Drive Expansion</strong></td>
+        <td>92.3 / 125.3 TB used (73%). All 8 bays full.</td>
+        <td>$400&ndash;$800/drive</td>
+        <td><span class="status status-needed">Past Trigger</span></td>
+        <td>Past 70% trigger. Options: clean redundant backups, reduce snapshots, replace smallest drives, offsite tiering.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- COST SUMMARY -->
+  <div class="summary-box">
+    <h3>Total Estimated Spend (Items To Buy)</h3>
+    <div class="cost-range">$1,502 &ndash; $2,402 AUD</div>
+    <div class="cost-note">
+      <strong>Core 10GbE (NAS + Socrates):</strong> TX401 $109 + QXG-10G2TB $339 + TL-SX1008 ~$450 + Cables $78 = <strong>~$976</strong><br>
+      <strong>NAS RAM:</strong> OWC 32GB ECC kit $200&ndash;$280 (or 64GB at $350&ndash;$500)<br>
+      <strong>NAS M.2 cache:</strong> $150&ndash;$400<br>
+      <strong>YubiKeys:</strong> $176<br><br>
+      <strong>Optional &mdash; Thunderbolt 10GbE:</strong><br>
+      Plato only: +$450 | Both Plato + Metabox: +$900<br><br>
+      <strong>Max with everything:</strong> ~$3,302 AUD
+    </div>
+  </div>
+
+  <!-- SUPPLIERS -->
+  <div class="section">
+    <h2>Supplier Summary</h2>
+    <table>
+      <tr><th>Supplier</th><th>What</th><th>Notes</th></tr>
+      <tr>
+        <td><strong>Scorptec</strong></td>
+        <td>TX401 + QXG-10G2TB + TL-SX1008 + Cat6A cables</td>
+        <td>Single order. QXG-10G2TB is "At Supplier" (may take a few days).</td>
+      </tr>
+      <tr>
+        <td><strong>Macfixit AU</strong></td>
+        <td>OWC Thunderbolt 4 10G Ethernet Adapter</td>
+        <td>In stock, ships 24hrs. $449.99 each.</td>
+      </tr>
+      <tr>
+        <td><strong>Amazon AU</strong></td>
+        <td>OWC 32GB DDR4 ECC SODIMM kit (NAS RAM)</td>
+        <td>QNAP-compatible matched pair.</td>
+      </tr>
+      <tr>
+        <td><strong>Yubico (direct)</strong></td>
+        <td>YubiKey 5C NFC &times;2</td>
+        <td>Ships from Singapore. 45-day returns.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div style="text-align:center; padding: 30px 0; color: #555; font-size: 0.8rem;">
+    Updated 5 May 2026 &bull; Events Fantastic &bull; DMD-verified parts
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var k = 'ef_infra_auth';
+  if (sessionStorage.getItem(k) === 'ok') show();
+  document.getElementById('pw').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') unlock();
+  });
+  window.unlock = function(){
+    var v = document.getElementById('pw').value;
+    if (v === 'WillowPillow123') {
+      sessionStorage.setItem(k, 'ok');
+      show();
+    } else {
+      document.getElementById('err').textContent = 'Incorrect password';
+    }
+  };
+  function show(){
+    document.getElementById('login-gate').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+  }
+})();
+</script>
+</body>
+</html>
