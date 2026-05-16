@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAS 10GbE Upgrade — Shopping List</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0f1419; color: #e7e9ea; padding: 24px; max-width: 900px; margin: 0 auto; }
+  h1 { color: #FFC629; font-size: 1.6rem; margin-bottom: 4px; }
+  .subtitle { color: #71767b; font-size: 0.9rem; margin-bottom: 24px; }
+  .store-group { background: #1a1f27; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #2f3640; }
+  .store-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #2f3640; }
+  .store-name { font-size: 1.2rem; font-weight: 700; color: #FFC629; }
+  .store-subtotal { font-size: 1.1rem; color: #71767b; }
+  .item { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #1e2530; }
+  .item:last-child { border-bottom: none; }
+  .item-left { flex: 1; }
+  .item-name { font-weight: 600; font-size: 1rem; color: #e7e9ea; }
+  .item-desc { color: #71767b; font-size: 0.85rem; margin-top: 4px; }
+  .item-for { color: #8b98a5; font-size: 0.8rem; margin-top: 2px; font-style: italic; }
+  .item-right { text-align: right; min-width: 120px; margin-left: 16px; }
+  .item-price { font-size: 1.1rem; font-weight: 700; color: #FFC629; }
+  .item-qty { color: #71767b; font-size: 0.8rem; }
+  .buy-btn { display: inline-block; margin-top: 8px; padding: 6px 16px; background: #FFC629; color: #0f1419; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
+  .buy-btn:hover { background: #e6b325; }
+  .total-bar { background: #FFC629; color: #0f1419; border-radius: 12px; padding: 20px; display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
+  .total-label { font-size: 1.2rem; font-weight: 700; }
+  .total-amount { font-size: 1.8rem; font-weight: 800; }
+  .checklist { margin-top: 24px; background: #1a1f27; border-radius: 12px; padding: 20px; border: 1px solid #2f3640; }
+  .checklist h2 { color: #FFC629; font-size: 1.1rem; margin-bottom: 12px; }
+  .check-item { padding: 6px 0; color: #8b98a5; font-size: 0.9rem; }
+  .check-item input { margin-right: 8px; accent-color: #FFC629; }
+  .note { background: #1c2533; border-left: 3px solid #FFC629; padding: 12px 16px; margin-top: 16px; border-radius: 0 8px 8px 0; font-size: 0.85rem; color: #8b98a5; }
+  .note strong { color: #e7e9ea; }
+  .cable-plan { margin-top: 24px; background: #1a1f27; border-radius: 12px; padding: 20px; border: 1px solid #2f3640; }
+  .cable-plan h2 { color: #FFC629; font-size: 1.1rem; margin-bottom: 12px; }
+  .cable-plan table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .cable-plan th { text-align: left; color: #71767b; padding: 6px 8px; border-bottom: 1px solid #2f3640; }
+  .cable-plan td { padding: 6px 8px; color: #e7e9ea; border-bottom: 1px solid #1e2530; }
+  .status { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; background: #1a3a1a; color: #4ade80; }
+  .status-warn { background: #3a2a1a; color: #fbbf24; }
+</style>
+</head>
+<body>
+
+<h1>NAS 10GbE Upgrade &mdash; Shopping List</h1>
+<p class="subtitle">Events Fantastic &bull; QNAP TS-855eU + Socrates &bull; Updated 2026-05-16 &bull; All items DMD-verified against QNAP TS-855eU compatibility list</p>
+
+<!-- CHEAPEST AU PER ITEM (staticice DMD 2026-05-16) -->
+<div class="store-group">
+  <div class="store-header">
+    <span class="store-name">Cheapest AU Sources &mdash; DMD-verified via staticice.com.au 2026-05-16</span>
+    <span class="store-subtotal">$777 + cables</span>
+  </div>
+
+  <div class="item">
+    <div class="item-left">
+      <div class="item-name">TP-Link TX401 &times; 1</div>
+      <div class="item-desc">10Gbps PCIe x4 Network Adapter &mdash; Aquantia AQC107 controller. Includes 1.5m Cat6A cable.</div>
+      <div class="item-for">For: Socrates (PCIe 4.0 x4 slot). Cheapest AU: 4-way tie at $99 &mdash; UMart, PLE, Mwave, MSY (all in stock).</div>
+      <a href="https://www.umart.com.au/product/tp-link-tx401-10gbps-pcie-ethernet-network-card-77023" target="_blank" class="buy-btn">Buy &rarr; UMart ($99)</a>
+    </div>
+    <div class="item-right">
+      <div class="item-price">$99</div>
+      <div class="item-qty">Qty: 1</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-left">
+      <div class="item-name">TP-Link TL-SX1008</div>
+      <div class="item-desc">8-port 10GbE RJ45 unmanaged switch &mdash; plug and play, auto-negotiates 100M/1G/2.5G/5G/10G per port.</div>
+      <div class="item-for">Central switch in NAS room. Cheapest AU: 4-way tie at $503 &mdash; Scorptec, PLE, Mwave, Computer Alliance.</div>
+      <a href="https://www.scorptec.com.au/product/networking/switches/101785-tl-sx1008" target="_blank" class="buy-btn">Buy &rarr; Scorptec ($503)</a>
+    </div>
+    <div class="item-right">
+      <div class="item-price">$503</div>
+      <div class="item-qty">Qty: 1</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-left">
+      <div class="item-name">QNAP QXG-10G1T (NAS NIC)</div>
+      <div class="item-desc">Single-port 10GBase-T &mdash; Aquantia AQC107S &mdash; low-profile bracket pre-loaded &mdash; PCIe Gen3 x2. <strong>ON the TS-855eU compatibility list.</strong></div>
+      <div class="item-for">For: NAS (QNAP TS-855eU PCIe Slot 1). Cheapest AU: <strong>UMart / MSY at $175</strong> (vs Mwave $285.95, I-Tech $301).</div>
+      <a href="https://www.umart.com.au" target="_blank" class="buy-btn">Buy &rarr; UMart ($175)</a>
+    </div>
+    <div class="item-right">
+      <div class="item-price">$175</div>
+      <div class="item-qty">Qty: 1</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>DMD finding 2026-05-16:</strong> QXG-10G1T at UMart / MSY is $175 &mdash; $110.95 cheaper than Mwave $285.95. Earlier handoff price was correct after all; Mwave was simply more expensive. Saving on this item alone justifies the cross-supplier sweep.
+  </div>
+</div>
+
+  <div class="item">
+    <div class="item-left">
+      <div class="item-name">ALOGIC 10m Cat6A Shielded Cable (Black) &times; 2</div>
+      <div class="item-desc">10GbE rated, shielded, LSZH, snag-free &mdash; for 10m room-to-room runs (switch to Socrates + switch to Plato)</div>
+      <div class="item-for">Switch (NAS room) &rarr; Socrates (next room, ~10m) + Switch &rarr; Plato (same room as Socrates)</div>
+      <a href="https://www.scorptec.com.au/product/cables-&-adapters/network/65620-c6a-10-black-sh" target="_blank" class="buy-btn">Buy &rarr; Scorptec ($32 each)</a>
+    </div>
+    <div class="item-right">
+      <div class="item-price">$64</div>
+      <div class="item-qty">Qty: 2 &times; $32</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-left">
+      <div class="item-name">ALOGIC 1m Cat6A Shielded Cable (Black)</div>
+      <div class="item-desc">10GbE rated, shielded &mdash; short patch for NAS to switch in same rack</div>
+      <div class="item-for">NAS (QXG-10G1T port) &rarr; Switch (same rack, ~1m)</div>
+    </div>
+    <div class="item-right">
+      <div class="item-price">~$14</div>
+      <div class="item-qty">Qty: 1</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Short cables:</strong> TX401 box includes a 1.5m Cat6A cable (use for Aristotle &rarr; switch when it arrives). NAS needs a separate short patch cable since QXG-10G1T doesn't include one.
+  </div>
+</div>
+
+<!-- M.2 SSD — cheapest AU -->
+<div class="store-group">
+  <div class="store-header">
+    <span class="store-name">M.2 SSD &mdash; NAS Cache</span>
+    <span class="store-subtotal">$664</span>
+  </div>
+
+  <div class="item">
+    <div class="item-left">
+      <div class="item-name">Samsung 990 EVO Plus 1TB &times; 2 (MZ-V9S1T0BW)</div>
+      <div class="item-desc">PCIe Gen4 x4 NVMe M.2 2280 &mdash; <strong>ON the TS-855eU SSD compatibility list</strong> (verified against TS-855eU_SSD.csv).</div>
+      <div class="item-for">For: NAS M.2 slots 1 &amp; 2 (both empty) &mdash; QTS cache. Cheapest AU: <strong>JB Hi-Fi at $332</strong> (vs Scorptec/CPL $349, MSY/UMart $399, Mwave $401).</div>
+      <a href="https://www.jbhifi.com.au" target="_blank" class="buy-btn">Buy &rarr; JB Hi-Fi ($332 ea)</a>
+    </div>
+    <div class="item-right">
+      <div class="item-price">$664</div>
+      <div class="item-qty">Qty: 2 &times; $332</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Price reality check:</strong> 1TB NVMe pricing has climbed in 2026 (RAM/NAND shortage). Old handoff estimate of ~$120 each is stale.
+  </div>
+</div>
+
+<!-- YUBIKEY — cheapest AU -->
+<div class="store-group">
+  <div class="store-header">
+    <span class="store-name">YubiKey 5C NFC &times; 2 &mdash; Thomas Admin 2FA</span>
+    <span class="store-subtotal">$216</span>
+  </div>
+
+  <div class="item">
+    <div class="item-left">
+      <div class="item-name">Yubico YubiKey 5C NFC &times; 2 (USB-C + NFC, non-FIPS)</div>
+      <div class="item-desc">Multi-factor security key &mdash; USB-C with NFC.</div>
+      <div class="item-for">For: Thomas admin 2FA (Azure / GitHub / Google Workspace). Cheapest AU: <strong>Scorptec $108</strong> (vs Computer Alliance $109, Mwave $109).</div>
+      <a href="https://www.scorptec.com.au" target="_blank" class="buy-btn">Buy &rarr; Scorptec ($108 ea)</a>
+    </div>
+    <div class="item-right">
+      <div class="item-price">$216</div>
+      <div class="item-qty">Qty: 2 &times; $108</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAS RAM — BLOCKER -->
+<div class="store-group">
+  <div class="store-header">
+    <span class="store-name">NAS RAM &mdash; <span style="color: #f87171;">BLOCKER: AU stock dry</span></span>
+    <span class="store-subtotal">TBC</span>
+  </div>
+
+  <div class="item">
+    <div class="item-left">
+      <div class="item-name">QNAP RAM-32GDR4ECK0-SO-3200 (32GB ECC SODIMM)</div>
+      <div class="item-desc">DMD-verified 2026-05-16 via Playwright sweep: <strong>NOT stocked at qnapshop.com.au</strong> (only 2 DDR4 products listed: 4GB non-ECC SODIMM + 8GB ECC UDIMM). <strong>Zero results on staticice.com.au</strong> (no AU retailer carries it). Status: EOL per QNAP US spec page.</div>
+      <div class="item-for">For: NAS (QNAP TS-855eU). This is on the TS-855eU compat list but cannot be purchased in AU right now.</div>
+    </div>
+    <div class="item-right">
+      <div class="item-price">N/A</div>
+      <div class="item-qty">Not available AU</div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-left">
+      <div class="item-name">QNAP RAM-16GDR4ECK0-SO-3200 (16GB ECC SODIMM)</div>
+      <div class="item-desc">DMD-verified 2026-05-16: <strong>Also zero results on staticice.com.au</strong> and not in qnapshop.com.au DDR4 category. Same blocker.</div>
+      <div class="item-for">For: NAS &mdash; on compat list, not buyable in AU.</div>
+    </div>
+    <div class="item-right">
+      <div class="item-price">N/A</div>
+      <div class="item-qty">Not available AU</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Three real paths from here:</strong>
+    <ol style="margin: 8px 0 0 24px; color: #8b98a5;">
+      <li><strong>Drop ECC, keep QNAP-branded</strong> &mdash; RAM-32GDR4K0-SO-3200 (32GB non-ECC SODIMM) <em>is</em> on the compat list and stocked at qnapshop.com.au. Lose bit-flip protection, keep brand + speed + capacity.</li>
+      <li><strong>Import from US</strong> &mdash; store.qnap.com (US) or nemixram.com ship QNAP RAM-32GDR4ECK0-SO-3200. Adds 1-2 weeks + shipping/GST.</li>
+      <li><strong>Hold</strong> &mdash; proceed with NIC + SSD + switch now, run NAS at current 12GB until AU ECC SODIMM stock returns. Lowest risk, no Qsirch.</li>
+    </ol>
+  </div>
+  <div class="note" style="margin-top: 8px;">
+    <strong>Removed:</strong> OWC + NEMIX 16GB DDR4-2666 ECC SODIMMs &mdash; neither on QNAP compat list, wrong speed, capacity-capped.
+  </div>
+</div>
+
+<!-- TOTAL -->
+<div class="total-bar">
+  <span class="total-label">Total (cheapest AU per item, ex RAM)</span>
+  <span class="total-amount">~$1,735</span>
+</div>
+<div class="note" style="margin-top: 8px;">
+  <strong>Breakdown:</strong> TX401 $99 (UMart) + TL-SX1008 $503 (Scorptec) + QXG-10G1T $175 (UMart) + 2&times; 990 EVO Plus 1TB $664 (JB Hi-Fi) + 2&times; YubiKey 5C NFC $216 (Scorptec) + cables ~$78 (Scorptec) = <strong>$1,735</strong>. RAM blocked &mdash; see RAM section. Three suppliers, one order each.
+</div>
+<div class="note" style="margin-top: 8px; background: #2a1c1c; border-left-color: #f87171;">
+  <strong>Answer to "is qnapshop cheaper than Scorptec for everything":</strong> No. qnapshop.com.au only stocks QNAP-specific gear (NAS units, QNAP RAM, some QNAP NICs) and even there, UMart/MSY beat them on the QXG-10G1T at $175. For switches, NICs (TX401), SSDs, and YubiKeys, qnapshop doesn't compete &mdash; UMart, JB Hi-Fi, and Scorptec own the cheapest slots. Per-item DMD beats single-supplier ordering by ~$200+ here.
+</div>
+
+<!-- DECISION LOG 2026-05-16 -->
+<div class="note" style="margin-top: 16px;">
+  <strong>Cross-project note &mdash; Socrates RAM (2026-05-16):</strong> Status quo. Keep current 4&times; 24GB Corsair Vengeance DDR5-5600 CL40 (96GB, 14.3ns first-word latency). MikePC's offered 2&times; 48GB DDR5-4800 CL42 remediation is <em>slower</em> than what's installed (17.5ns) AND "Crucial 48GB DDR5-4800 CL42" doesn't exist as a real Crucial UDIMM SKU (verified against crucial.com 2026-05-16 &mdash; Crucial caps DDR5-4800 desktop UDIMMs at 32GB; 48GB only at DDR5-5600 CL46). Belongs to the MikePC ACL dispute, not this NAS plan &mdash; logged here for cross-reference only.
+</div>
+<div class="note" style="margin-top: 8px;">
+  <strong>Marketplace finds reviewed 2026-05-16 &mdash; all rejected:</strong>
+  <ul style="margin: 8px 0 0 24px; color: #8b98a5;">
+    <li><strong>QNAP "TS-X64" server A$800</strong> &mdash; "TS-X64" not a real QNAP model code; likely TS-464 (4-bay). A$800 used vs ~$899 new diskless = poor deal unless drives included. Ask seller for back-panel label + drive status before considering.</li>
+    <li><strong>QNAP QSW-2104-2T switch A$250</strong> &mdash; only 2&times; 10G ports (covers NAS + Socrates only); Plato &amp; Aristotle stay capped at 2.5G. LEGACY status per QNAP. Saving $253 vs TL-SX1008 costs Plato + Aristotle their 10G link. Skip.</li>
+    <li><strong>MikroTik RB2011UiAS-RM "+ 10G SFP+ module" A$40</strong> &mdash; 2013-era 1G product. The SFP cage is 1G only, not SFP+. Cannot do 10G regardless of module. Skip.</li>
+  </ul>
+</div>
+
+<!-- CABLE PLAN -->
+<div class="cable-plan">
+  <h2>Cable Plan &mdash; Physical Layout</h2>
+  <table>
+    <tr><th>From</th><th>To</th><th>Cable</th><th>Length</th><th>Speed</th></tr>
+    <tr><td>NAS (QXG-10G1T, Slot 1)</td><td>Switch</td><td>ALOGIC 1m Cat6A (purchased separately)</td><td>1m</td><td>10GbE</td></tr>
+    <tr><td>Aristotle (when arrives)</td><td>Switch</td><td>Cat6A (included w/ TX401 box)</td><td>1.5m</td><td>10GbE</td></tr>
+    <tr><td>Switch</td><td>Socrates (next room)</td><td>ALOGIC 10m Cat6A (purchased)</td><td>10m</td><td>10GbE</td></tr>
+    <tr><td>Switch</td><td>Plato (next room)</td><td>ALOGIC 10m Cat6A (purchased)</td><td>10m</td><td>10GbE</td></tr>
+  </table>
+  <p style="margin-top: 12px; color: #71767b; font-size: 0.8rem;">Switch location: NAS room (same area as NAS + Aristotle). Two 10m runs through wall/conduit to Socrates + Plato room.</p>
+</div>
+
+<!-- INSTALL CHECKLIST -->
+<div class="checklist">
+  <h2>Install Checklist (order of operations)</h2>
+  <div class="check-item"><input type="checkbox"> Power down NAS &mdash; remove both existing RAM sticks</div>
+  <div class="check-item"><input type="checkbox"> Install 2&times; QNAP RAM-32GDR4ECK0-SO-3200 ECC pair (both slots) &mdash; aim for 64GB total</div>
+  <div class="check-item"><input type="checkbox"> Install QXG-10G1T in NAS PCIe Slot 1 (low-profile bracket pre-fitted)</div>
+  <div class="check-item"><input type="checkbox"> Power on NAS &mdash; verify 64GB RAM in QTS &rarr; System Status</div>
+  <div class="check-item"><input type="checkbox"> Verify QXG-10G1T detected in QTS &rarr; Network &amp; Virtual Switch (1 new 10G port)</div>
+  <div class="check-item"><input type="checkbox"> Assign IP to NAS 10GbE port 1 (static recommended, e.g. 10.0.0.1/24, or DHCP)</div>
+  <div class="check-item"><input type="checkbox"> Set up TL-SX1008 switch in NAS room &mdash; plug in power</div>
+  <div class="check-item"><input type="checkbox"> Connect NAS &rarr; switch (1m Cat6A patch cable)</div>
+  <div class="check-item"><input type="checkbox"> Run 10m Cat6A cables from switch through to Socrates/Plato room</div>
+  <div class="check-item"><input type="checkbox"> Shut down Socrates &mdash; install TX401 in PCIe 4.0 x4 slot</div>
+  <div class="check-item"><input type="checkbox"> Boot Socrates &mdash; drivers should auto-install (Windows 11)</div>
+  <div class="check-item"><input type="checkbox"> Connect Socrates &rarr; switch (10m Cat6A)</div>
+  <div class="check-item"><input type="checkbox"> Assign matching IP on Socrates 10GbE adapter (e.g. 10.0.0.2/24, or DHCP)</div>
+  <div class="check-item"><input type="checkbox"> Test speed: <code>iperf3 -s</code> on NAS (SSH), <code>iperf3 -c 10.0.0.1</code> on Socrates &mdash; expect ~9.4 Gbps</div>
+  <div class="check-item"><input type="checkbox"> Map NAS share on Socrates: <code>net use Z: \\10.0.0.1\Public</code></div>
+  <div class="check-item"><input type="checkbox"> Run dedup dry-run: <code>.\dedup_setup.ps1 -DryRun</code></div>
+</div>
+
+<div class="note" style="margin-top: 24px;">
+  <strong>DMD catch (chassis):</strong> Original plan had 2&times; TX401. The TX401 is full-height (98.2mm) and <em>physically will not fit</em> the TS-855eU 2U rackmount (68.9mm PCIe clearance). QNAP QXG cards are 67mm by design. TX401 stays for Socrates (desktop tower).
+</div>
+<div class="note" style="margin-top: 8px;">
+  <strong>DMD catch (RAM compat):</strong> OWC + NEMIX SODIMMs removed 2026-05-16 &mdash; neither is on QNAP's TS-855eU memory compatibility list (verified against `C:\Users\Thomas\Downloads\Nas Expandability\TS-855eU_Memory.csv`). Only 4 modules are approved: 16GB / 32GB &times; ECC / non-ECC, all QNAP-branded RAM-xxGDR4(EC)K0-SO-3200.
+</div>
+<div class="note" style="margin-top: 8px;">
+  <strong>DMD catch (NIC compat):</strong> Scorptec "QXG-10G2T" (SKU 108803) removed 2026-05-16 &mdash; not explicitly on the TS-855eU expansion card list. On-list dual-port variants are QXG-10G2TB, QXG-10G2T-X710, and QXG-10G2T-107 only. QXG-10G1T (Mwave) and QXG-10G2TB (Scorptec) are the two safe buys.
+</div>
+
+<p style="text-align: center; color: #71767b; font-size: 0.75rem; margin-top: 24px;">
+  Events Fantastic &bull; NAS 10GbE Upgrade Plan &bull; 2026-05-16 &bull; Generated by Claude Code &bull; All items verified against QNAP TS-855eU compatibility CSVs
+</p>
+
+</body>
+</html>
